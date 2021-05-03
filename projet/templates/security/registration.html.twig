@@ -4,7 +4,8 @@
     <h1> Inscription </h1>
 
     {{ form_start( form ) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.password)}}
     <button type='submit' class='btn btn-success'> Inscription </button>
     {{ form_end(form)}}
 
