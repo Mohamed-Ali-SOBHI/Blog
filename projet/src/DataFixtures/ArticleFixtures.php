@@ -25,7 +25,7 @@ class ArticleFixtures extends Fixture
             for($j = 1; $j<mt_rand(4,6) ; $j++){
                 $article = new Article();
 
-                $content .= '<p>' . join($faker->paraghaphs(5), '</p> <p>') . '</p>';
+                $content = '<p>' . join($faker->paragraphs(5), '</p> <p>') . '</p>';
 
                 $article->setTitle($faker->sentence())
                         ->setContent($content)
@@ -36,19 +36,17 @@ class ArticleFixtures extends Fixture
                 $manager->persist($article);
             }
 
-            for($k; $k<=mt_rand(4,10); $k++){
+            for($k=1; $k<=mt_rand(4,10); $k++){
                 $comment = new Comment();
 
-                $content .= '<p>' . join($faker->paraghaphs(5), '</p> <p>') . '</p>';
+                $content = '<p>' . join($faker->paragraphs(2), '</p> <p>') . '</p>';
 
-                $now = new \DateTime();
-                $inter = $now->diff($article->getCreatedAt());
-                $days = $inter->$days;
-                $min = '-' . $days . 'days';
-
+                $days = (new \DateTime())->diff($article->getCreatedAt());
+                $min = '-' . $days->format('d') . ' days';
+                
                 $comment->setAuthor($faker->name)
-                        ->setContent($comment)
-                        ->setCreadetAt($faker->dateTimeBetween($min))
+                        ->setContent($content)
+                        ->setCreatedAt($faker->dateTimeBetween($min))
                         ->setArticle($article);
 
                 $manager->persist($comment);
