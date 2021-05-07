@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
@@ -31,8 +33,13 @@ class Utilisateur implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * Assert\lenght(min="8", minMessage="Votre mot de passe est trop court")
      */
     private $password;
+    /**
+     * Assert\EqualTo(propertyPath="password", message="il faut mettre le même mot de passe")
+     */
+    public $confirme_password;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
