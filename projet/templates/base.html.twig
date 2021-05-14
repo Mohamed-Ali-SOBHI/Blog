@@ -28,9 +28,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">créer un article</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_login')}}">login</a>
-                    </li>
+                    {% if not app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_login')}}">login</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_logout')}}">logout</a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('sign_up')}}">sign up</a>
                     </li>

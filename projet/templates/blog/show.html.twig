@@ -11,6 +11,7 @@
         </article>
     
         <section id="commentaires"
+            <h1> Commetaires </h1>
             {% for comment in article.comments %}
                 <div class="comment"
                     <div class="row"
@@ -23,4 +24,16 @@
                     </div>
                 </div>
             {% endfor %}
+            {% if  app.user %}
+                {{ form_start( commentForm ) }}
+                {{ form_row( commentForm.author ) }}
+                {{ form_row( commentForm.content ) }}
+                <button type='submit' class='btn btn-success'> commentez </button>
+                {{ form_end(commentForm)}}
+            {% else %}
+                <h2> vous ne pouvez pas commenter si vous n'etes pas connecter</h2>
+                 <a class="nav-link" href="{{ path('app_login')}}">login</a>
+            {% endif %}
+
+        </section>
 {% endblock %}
