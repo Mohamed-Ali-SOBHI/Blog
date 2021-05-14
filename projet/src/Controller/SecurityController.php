@@ -47,8 +47,12 @@ class SecurityController extends AbstractController
         $form = $this->createForm(RegistrationType::class, $utilisateur);
 
         $form->handleRequest($request);
+        
 
         if($form->isSubmitted() && $form->isValid()){
+            $role = ["Admin"];
+            $utilisateur->setRoles($role)
+                        ->setRole("Admin");
             $manager->persist($utilisateur);
             $manager->flush();
         }

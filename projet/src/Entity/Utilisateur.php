@@ -2,14 +2,20 @@
 
 namespace App\Entity;
 
-use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+use App\Repository\UtilisateurRepository;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
+ * @UniqueEntity(
+ *  fields= {"email"},
+ *  message="Email déjà utiliser"
+ * )
  */
 class Utilisateur implements UserInterface
 {
@@ -22,11 +28,12 @@ class Utilisateur implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email()
      */
     private $email;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="json", nullable=true)
      */
     private $roles = [];
 
