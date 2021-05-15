@@ -1,5 +1,9 @@
 {% extends 'base.html.twig'%}
 
+{% block javascripts %}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/asciidoctor.js/1.5.5-5/asciidoctor.min.js" integrity="sha512-J7IXHi6LD/94IioL/slk1hNk85wBBH7x8zpyaAiqBd801N/zcSDXWQknUtgriVuwNeG3rjqWdvcHoYhMaRE4Ew==" crossorigin="anonymous"></script>
+{% endblock %}
+
 {% block body %}
         <article>
             <h2> {{ article.title }} </h2>
@@ -36,4 +40,16 @@
             {% endif %}
 
         </section>
+{% endblock %}
+
+{% block javascript %}
+        <script>
+            function htmlEntities(str) {
+                //return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+                return String(str).replace(/&amp;/g, '&').replace(/&lt;;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+
+            }
+            d = Asciidoctor();
+            ad.innerHTML = d.convert(htmlEntities(ad.innerHTML));
+        </script>
 {% endblock %}
